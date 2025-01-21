@@ -172,7 +172,7 @@ namespace PeterDB {
 
         // Add 1 to pageNum to account for metadata page
         unsigned actualPageNum = pageNum + 1;
-        unsigned totalPages = getNumberOfPages();
+        unsigned totalPages = getNumberOfPages() + 1;
 
         if (actualPageNum >= totalPages) {
             return -1;
