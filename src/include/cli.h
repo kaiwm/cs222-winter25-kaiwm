@@ -2,6 +2,7 @@
 #define _cli_h_
 
 #include <string>
+#include <climits>
 #include <cstring>
 #include <cassert>
 #include <iomanip>

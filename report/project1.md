@@ -9,6 +9,11 @@
  - Student 2 UCI NetID (if applicable):
  - Student 2 Name (if applicable):
 
+https://github.com/kaiwm/PeterDB-template
+
+kaiwm@uci.edu
+
+Kevin Ma (Kai Wen Ma)
 
 ### 2. Internal Record Format
 - Show your record format design.
@@ -43,11 +48,16 @@
 
 - How many hidden pages are utilized in your design?
 
-
+1 page to keep track of data.
 
 - Show your hidden page(s) format design if applicable
 
-
+MetadataPage metadata = {
+        getNumberOfPages(),
+        readPageCounter,
+        writePageCounter,
+        appendPageCounter
+};
 
 ### 5. Implementation Detail
 - Other implementation details goes here.

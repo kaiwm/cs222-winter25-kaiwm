@@ -4,6 +4,11 @@
 #define PAGE_SIZE 4096
 
 #include <string>
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <sys/stat.h>
+#include <unistd.h>
 
 namespace PeterDB {
 
@@ -11,6 +16,14 @@ namespace PeterDB {
     typedef int RC;
 
     class FileHandle;
+
+    struct MetadataPage {
+        unsigned numberOfPages;  // Excludes metadata page itself
+        unsigned readPageCounter;
+        unsigned writePageCounter;
+        unsigned appendPageCounter;
+    };
+
 
     class PagedFileManager {
     public:
@@ -31,6 +44,8 @@ namespace PeterDB {
 
     class FileHandle {
     public:
+        FILE* file;  // File
+
         // variables to keep the counter for each operation
         unsigned readPageCounter;
         unsigned writePageCounter;
@@ -39,9 +54,10 @@ namespace PeterDB {
         FileHandle();                                                       // Default constructor
         ~FileHandle();                                                      // Destructor
 
+        RC updateMetadata();
         RC readPage(PageNum pageNum, void *data);                           // Get a specific page
         RC writePage(PageNum pageNum, const void *data);                    // Write a specific page
-        RC appendPage(const void *data);                                    // Append a specific page
+        RC appendPage(const void *data);                // Append a specific page
         unsigned getNumberOfPages();                                        // Get the number of pages in the file
         RC collectCounterValues(unsigned &readPageCount, unsigned &writePageCount,
                                 unsigned &appendPageCount);                 // Put current counter values into variables
